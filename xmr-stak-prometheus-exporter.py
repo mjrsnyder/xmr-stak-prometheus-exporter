@@ -11,7 +11,11 @@ class JsonCollector(object):
   def collect(self):
     for endpoint in self._endpoints:
       # Fetch the JSON
-      response = json.loads(requests.get(endpoint).content.decode('UTF-8'))
+      try:
+        response = json.loads(requests.get(endpoint, timeout=10).content.decode('UTF-8'))
+      except:
+        print("Failed to connect to {}".format(endpoint))
+        continue
 
       # Shares
       metric = Metric('xmr_stak_shares', 
