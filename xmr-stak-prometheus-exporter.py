@@ -12,7 +12,7 @@ class JsonCollector(object):
     for endpoint in self._endpoints:
       # Fetch the JSON
       try:
-        response = json.loads(requests.get(endpoint, timeout=10).content.decode('UTF-8'))
+        response = json.loads(requests.get(endpoint, timeout=2.0).content.decode('UTF-8'))
       except:
         print("Failed to connect to {}".format(endpoint))
         continue
